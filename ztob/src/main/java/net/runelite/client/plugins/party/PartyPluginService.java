@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Owain van Brakel <https://github.com/Owain94>
+ * Copyright (c) 2019, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,22 +22,19 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package net.runelite.client.plugins.party;
 
-plugins {
-    `kotlin-dsl`
-}
+import java.util.UUID;
+import javax.annotation.Nullable;
+import net.runelite.client.plugins.party.data.PartyData;
 
-repositories {
-    jcenter()
-}
-
-dependencies {
-    implementation(gradleApi())
-    implementation(group = "org.json", name = "json", version = "20190722")
-    implementation(group = "com.savvasdalkitsis", name = "json-merge", version = "0.0.4")
-    implementation(group = "com.squareup.okhttp3", name = "okhttp", version = "4.2.2")
-}
-
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
+public interface PartyPluginService
+{
+	/**
+	 * Get the party data for a party member
+	 * @param memberId member id
+	 * @return party data for member
+	 */
+	@Nullable
+	PartyData getPartyData(UUID memberId);
 }

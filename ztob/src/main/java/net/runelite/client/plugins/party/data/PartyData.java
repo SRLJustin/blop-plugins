@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2019 Owain van Brakel <https://github.com/Owain94>
+ * Copyright (c) 2019, Tomas Slusny <slusnucky@gmail.com>
+ * Copyright (c) 2021, Jonathan Rousseau <https://github.com/JoRouss>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,22 +23,30 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package net.runelite.client.plugins.party.data;
 
-plugins {
-    `kotlin-dsl`
-}
+import java.awt.Color;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import net.runelite.client.ui.overlay.components.PanelComponent;
+import net.runelite.client.ui.overlay.worldmap.WorldMapPoint;
+import net.runelite.client.ws.PartyMember;
 
-repositories {
-    jcenter()
-}
+@Setter
+@Getter
+@RequiredArgsConstructor
+public class PartyData
+{
+	private final PartyMember member;
+	private final WorldMapPoint worldMapPoint;
+	private final PanelComponent panel = new PanelComponent();
+	private final Color color;
 
-dependencies {
-    implementation(gradleApi())
-    implementation(group = "org.json", name = "json", version = "20190722")
-    implementation(group = "com.savvasdalkitsis", name = "json-merge", version = "0.0.4")
-    implementation(group = "com.squareup.okhttp3", name = "okhttp", version = "4.2.2")
-}
-
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
+	private int hitpoints;
+	private int maxHitpoints;
+	private int prayer;
+	private int maxPrayer;
+	private String characterName = "";
+	private boolean showOverlay;
 }

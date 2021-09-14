@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Owain van Brakel <https://github.com/Owain94>
+ * Copyright (c) 2019, Tomas Slusny <slusnucky@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,22 +22,45 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package net.runelite.client.plugins.party;
 
-plugins {
-    `kotlin-dsl`
-}
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import net.runelite.api.Point;
+import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.ui.overlay.worldmap.WorldMapPoint;
+import net.runelite.client.util.ImageUtil;
+import net.runelite.client.ws.PartyMember;
 
-repositories {
-    jcenter()
-}
+class PartyWorldMapPoint extends WorldMapPoint
+{
+	private static final BufferedImage ARROW = ImageUtil.loadImageResource(PartyWorldMapPoint.class, "/util/clue_arrow.png");
 
-dependencies {
-    implementation(gradleApi())
-    implementation(group = "org.json", name = "json", version = "20190722")
-    implementation(group = "com.savvasdalkitsis", name = "json-merge", version = "0.0.4")
-    implementation(group = "com.squareup.okhttp3", name = "okhttp", version = "4.2.2")
-}
+	private BufferedImage partyImage;
+	private final PartyMember member;
 
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
+	PartyWorldMapPoint(WorldPoint worldPoint, PartyMember member)
+	{
+		super(worldPoint, null);
+		this.member = member;
+		this.setSnapToEdge(true);
+		this.setJumpOnClick(true);
+		this.setImagePoint(new Point(
+			ARROW.getWidth() / 2,
+			ARROW.getHeight()));
+	}
+
+	@Override
+	public BufferedImage getImage()
+	{
+		if (partyImage == null && member != null && member.getAvatar() != null)
+		{
+			partyImage = new BufferedImage(ARROW.getWidth(), ARROW.getHeight(), BufferedImage.TYPE_INT_ARGB);
+			Graphics g = partyImage.getGraphics();
+			g.drawImage(ARROW, 0, 0, null);
+			g.drawImage(ImageUtil.resizeImage(member.getAvatar(), 28, 28), 2, 2, null);
+		}
+
+		return partyImage;
+	}
 }

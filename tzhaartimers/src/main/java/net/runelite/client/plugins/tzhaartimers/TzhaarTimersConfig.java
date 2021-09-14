@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Owain van Brakel <https://github.com/Owain94>
+ * Copyright (c) 2019, winterdaze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,22 +22,28 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package net.runelite.client.plugins.tzhaartimers;
 
-plugins {
-    `kotlin-dsl`
-}
+import net.runelite.client.config.Config;
+import net.runelite.client.config.ConfigGroup;
+import net.runelite.client.config.ConfigItem;
 
-repositories {
-    jcenter()
-}
+@ConfigGroup("tzhaartimers")
+public interface TzhaarTimersConfig extends Config
+{
+    String CONFIG_GROUP = "tzhaartimers";
+    String CONFIG_TIME = "time";
+    String CONFIG_STARTED = "started";
+    String CONFIG_LASTTIME = "lasttime";
 
-dependencies {
-    implementation(gradleApi())
-    implementation(group = "org.json", name = "json", version = "20190722")
-    implementation(group = "com.savvasdalkitsis", name = "json-merge", version = "0.0.4")
-    implementation(group = "com.squareup.okhttp3", name = "okhttp", version = "4.2.2")
-}
-
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
+    @ConfigItem(
+            keyName = "tzhaarTimers",
+            name = "Display elapsed time in the Fight Caves and Inferno",
+            description = "Display elapsed time in the Fight Caves and Inferno",
+            hidden = true
+    )
+    default boolean tzhaarTimers()
+    {
+        return true;
+    }
 }

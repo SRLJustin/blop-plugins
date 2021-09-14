@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Owain van Brakel <https://github.com/Owain94>
+ * Copyright (c) 2019, Tomas Slusny <slusnucky@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,22 +22,18 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package net.runelite.client.plugins.party.messages;
 
-plugins {
-    `kotlin-dsl`
-}
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import net.runelite.api.Skill;
+import net.runelite.http.api.ws.messages.party.PartyMemberMessage;
 
-repositories {
-    jcenter()
-}
-
-dependencies {
-    implementation(gradleApi())
-    implementation(group = "org.json", name = "json", version = "20190722")
-    implementation(group = "com.savvasdalkitsis", name = "json-merge", version = "0.0.4")
-    implementation(group = "com.squareup.okhttp3", name = "okhttp", version = "4.2.2")
-}
-
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
+@AllArgsConstructor
+@Getter
+public class SkillUpdate extends PartyMemberMessage
+{
+	private final Skill skill;
+	private final int value;
+	private final int max;
 }
