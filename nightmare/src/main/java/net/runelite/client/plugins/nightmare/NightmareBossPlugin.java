@@ -19,6 +19,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.infobox.Timer;
 import net.runelite.client.util.Text;
+import org.pf4j.Extension;
 
 import javax.inject.Inject;
 import java.awt.image.BufferedImage;
@@ -31,6 +32,7 @@ import java.time.temporal.ChronoUnit;
 	enabledByDefault = false
 )
 @Slf4j
+@Extension
 public class NightmareBossPlugin extends Plugin
 {
 	@Inject
