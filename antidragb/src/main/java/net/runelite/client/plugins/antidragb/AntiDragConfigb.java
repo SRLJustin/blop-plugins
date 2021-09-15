@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Owain van Brakel <https:github.com/Owain94>
+ * Copyright (c) 2018, DennisDeV <https://github.com/DevDennis>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,20 +22,24 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package net.runelite.client.plugins.antidragb;
 
-rootProject.name = "BLOP Plugins"
-include(":ztob")
-include(":zgauntlet")
-include(":tzhaartimers")
-include(":nightmare")
-include(":antidragb")
+import net.runelite.api.Constants;
+import net.runelite.client.config.Config;
+import net.runelite.client.config.ConfigGroup;
+import net.runelite.client.config.ConfigItem;
 
-for (project in rootProject.children) {
-    project.apply {
-        projectDir = file(name)
-        buildFileName = "$name.gradle.kts"
-
-        require(projectDir.isDirectory) { "Project '${project.path} must have a $projectDir directory" }
-        require(buildFile.isFile) { "Project '${project.path} must have a $buildFile build script" }
-    }
+@ConfigGroup(AntiDragPluginb.CONFIG_GROUP)
+public interface AntiDragConfigb extends Config
+{
+	@ConfigItem(
+		keyName = "dragDelay",
+		name = "Drag Delay",
+		description = "Configures the inventory drag delay in client ticks (20ms)",
+		position = 1
+	)
+	default int dragDelay()
+	{
+		return Constants.GAME_TICK_LENGTH / Constants.CLIENT_TICK_LENGTH; // one game tick
+	}
 }

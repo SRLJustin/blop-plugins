@@ -1,10 +1,6 @@
 package net.runelite.client.plugins.tobstats;
 
 import com.google.inject.Provides;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Optional;
-import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
@@ -24,6 +20,12 @@ import net.runelite.client.plugins.tobstats.rooms.Verzik.Verzik;
 import net.runelite.client.plugins.tobstats.rooms.Xarpus.Xarpus;
 import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.util.Text;
+import org.pf4j.Extension;
+
+import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Optional;
 
 @PluginDescriptor(
 	name = "Theatre stats",
@@ -31,6 +33,7 @@ import net.runelite.client.util.Text;
 	tags = {"tob","stats","statistics"},
 	enabledByDefault = false
 )
+@Extension
 @Slf4j
 public class TobstatsPlugin extends Plugin
 {
