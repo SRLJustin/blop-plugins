@@ -25,7 +25,6 @@
 package net.runelite.client.plugins.antidragb;
 
 import com.google.inject.Provides;
-import javax.inject.Inject;
 import net.runelite.api.Client;
 import net.runelite.api.events.FocusChanged;
 import net.runelite.api.events.WidgetLoaded;
@@ -38,6 +37,9 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
+import org.pf4j.Extension;
+
+import javax.inject.Inject;
 
 @PluginDescriptor(
 	name = "[BL] Anti Drag",
@@ -45,6 +47,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 	tags = {"antidrag", "delay", "inventory", "items"},
 	enabledByDefault = false
 )
+@Extension
 public class AntiDragPluginb extends Plugin
 {
 	static final String CONFIG_GROUP = "[b]antiDrag";

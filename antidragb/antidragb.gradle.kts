@@ -24,7 +24,7 @@
  */
 
 
-version = "1.0.0"
+version = "1.0.1"
 
 project.extra["PluginName"] = "[BL] Anti Drag"
 project.extra["PluginDescription"] = "[BL] Prevent dragging an item for a specified delay"
